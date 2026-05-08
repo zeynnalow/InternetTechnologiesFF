@@ -1,29 +1,17 @@
 {% extends 'stats/base.html' %}
-
 {% block content %}
-<div class="hero-section">
-    <h1>League Leaders</h1>
-    <p>Top Scorers and Assist Kings.</p>
-</div>
-
+<div class="hero-section"><h1>League Leaders</h1></div>
 <div class="dashboard-grid">
     <div class="card">
         <div class="card-header"><h2>Top Scorers</h2></div>
         {% for p in top_scorers %}
-        <div class="team-pill">
-            <span>{{ p.first_name }} {{ p.last_name }}</span>
-            <span class="score">{{ p.goals }} G</span>
-        </div>
+        <div class="team-pill"><span>{{ p.first_name }} {{ p.last_name }}</span><span class="score">{{ p.goals }} G</span></div>
         {% endfor %}
     </div>
-
     <div class="card">
-        <div class="card-header"><h2>Top Assists</h2></div>
-        {% for p in top_assists %}
-        <div class="team-pill">
-            <span>{{ p.first_name }} {{ p.last_name }}</span>
-            <span class="score" style="color:#10b981">{{ p.assists }} A</span>
-        </div>
+        <div class="card-header"><h2>Top Goalkeepers (Least Conceded)</h2></div>
+        {% for p in goalkeepers %}
+        <div class="team-pill"><span>{{ p.first_name }} {{ p.last_name }}</span><span class="score" style="color:red">{{ p.goals_conceded }} GC</span></div>
         {% endfor %}
     </div>
 </div>

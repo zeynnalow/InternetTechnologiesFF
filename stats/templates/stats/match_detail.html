@@ -1,0 +1,35 @@
+{% extends 'stats/base.html' %}
+{% block content %}
+<div class="hero-section">
+    <h1>{{ match.home_team.name }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team.name }}</h1>
+    <p>Match Details & Squads</p>
+</div>
+<div class="dashboard-grid">
+    <div class="card">
+        <div class="card-header"><h2>⚽ Goals</h2></div>
+        <ul style="list-style:none;">
+            {% for g in scorers %}
+                <li style="padding:10px 0; border-bottom:1px solid #eee;">
+                    <strong>{{ g.player.first_name }} {{ g.player.last_name }}</strong> 
+                    <span style="color:var(--primary-color)">({{ g.minute }}')</span>
+                </li>
+            {% empty %}
+                <li>No goals recorded.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="card">
+        <div class="card-header"><h2>📋 Match Lineups</h2></div>
+        <div class="team-grid">
+            {% for p in squad %}
+            <div class="team-pill">
+                <span>{{ p.first_name }} {{ p.last_name }}</span>
+                <small style="color:var(--primary-color)">
+                    {% for pos in p.positions.all %}{{ pos.name }} {% endfor %}
+                </small>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'stats/base.html' %}
+{% block content %}
+<div class="hero-section"><h1>Full Match History</h1></div>
+<div class="card">
+    <div class="table-wrapper">
+        <table class="match-table">
+            <thead><tr><th>Match</th><th>Score</th><th>Date</th><th>Details</th></tr></thead>
+            <tbody>
+                {% for m in matches %}
+                <tr>
+                    <td>{{ m.home_team.name }} vs {{ m.away_team.name }}</td>
+                    <td class="score">{{ m.home_score }} - {{ m.away_score }}</td>
+                    <td>{{ m.date|date:"d M Y" }}</td>
+                    <td><a href="{% url 'match_detail' m.id %}" class="admin-btn" style="padding:4px 8px; font-size:0.7rem;">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
