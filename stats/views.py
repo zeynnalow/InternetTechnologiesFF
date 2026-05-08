@@ -3,7 +3,7 @@ from .models import Team, Player, Match
 
 def home(request):
     teams = Team.objects.all()
-    recent_matches = Match.objects.all().order_by('-date')[:3] # Sadece son 3 matç
+    recent_matches = Match.objects.all().order_by('-date')[:3]
     return render(request, 'stats/home.html', {'teams': teams, 'matches': recent_matches})
 
 def all_matches(request):
@@ -18,11 +18,12 @@ def match_detail(request, match_id):
 
 def player_stats(request):
     top_scorers = Player.objects.order_by('-goals')[:10]
-    # Qapıçılar (GK mövqeyi olanlar) buraxdıqları qola görə
     goalkeepers = Player.objects.filter(positions__name="GK").order_by('goals_conceded')
     return render(request, 'stats/players.html', {'top_scorers': top_scorers, 'goalkeepers': goalkeepers})
 
+
 def team_detail(request, team_id):
     team = get_object_or_404(Team, id=team_id)
-    players = team.players.all().order_by('-goals')
-    return render(request, 'stats/team_detail.html', {'team': team, 'players': players})
+
+    squad = team.players.all().order_by('-goals')
+    return render(request, 'stats/team_detail.html', {'team': team, 'squad': squad})
