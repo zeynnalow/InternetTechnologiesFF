@@ -3,49 +3,46 @@
 {% block content %}
 <div class="hero-section">
     <h1>League Dashboard</h1>
-    <p>Track team performances and match results in real-time.</p>
+    <p>Real-time football management and statistics.</p>
 </div>
 
 <div class="dashboard-grid">
     <div class="card">
-        <div class="card-header">
-            <h2>Active Teams</h2>
-        </div>
+        <div class="card-header"><h2>Teams</h2></div>
         <div class="team-grid">
             {% for team in teams %}
             <a href="{% url 'team_detail' team.id %}" class="team-pill">
-                <span class="team-icon">🛡️</span>
-                <span class="team-name">{{ team.name }}</span>
-                <span class="team-city">{{ team.city }}</span>
+                <span>🛡️ {{ team.name }}</span>
+                <small style="color:var(--text-muted)">{{ team.city }}</small>
             </a>
             {% endfor %}
         </div>
     </div>
 
     <div class="card">
-        <div class="card-header">
-            <h2>Recent Results</h2>
+        <div class="card-header"><h2>Recent Results</h2></div>
+        <div class="table-wrapper">
+            <table class="match-table">
+                <thead>
+                    <tr>
+                        <th>Home</th>
+                        <th>Score</th>
+                        <th>Away</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for match in matches %}
+                    <tr>
+                        <td>{{ match.home_team.name }}</td>
+                        <td class="score">{{ match.home_score }} - {{ match.away_score }}</td>
+                        <td>{{ match.away_team.name }}</td>
+                        <td>{{ match.date|date:"d M" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <table class="match-table">
-            <thead>
-                <tr>
-                    <th>Home</th>
-                    <th>Score</th>
-                    <th>Away</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for match in matches %}
-                <tr>
-                    <td>{{ match.home_team.name }}</td>
-                    <td class="score">{{ match.home_score }} - {{ match.away_score }}</td>
-                    <td>{{ match.away_team.name }}</td>
-                    <td class="date">{{ match.date|date:"d M Y" }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 </div>
 {% endblock %}

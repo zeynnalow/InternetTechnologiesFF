@@ -3,30 +3,26 @@
 {% block content %}
 <div class="hero-section">
     <h1>League Leaders</h1>
-    <p>Top performing players of the current season.</p>
+    <p>Top Scorers and Assist Kings.</p>
 </div>
 
 <div class="dashboard-grid">
     <div class="card">
-        <div class="card-header">
-            <h2>Top Scorers</h2>
-        </div>
+        <div class="card-header"><h2>Top Scorers</h2></div>
         {% for p in top_scorers %}
         <div class="team-pill">
-            <span class="team-name">{{ p.first_name }} {{ p.last_name }}</span>
+            <span>{{ p.first_name }} {{ p.last_name }}</span>
             <span class="score">{{ p.goals }} G</span>
         </div>
         {% endfor %}
     </div>
 
     <div class="card">
-        <div class="card-header">
-            <h2>Assist Kings</h2>
-        </div>
+        <div class="card-header"><h2>Top Assists</h2></div>
         {% for p in top_assists %}
         <div class="team-pill">
-            <span class="team-name">{{ p.first_name }} {{ p.last_name }}</span>
-            <span class="score" style="color: #10b981;">{{ p.assists }} A</span>
+            <span>{{ p.first_name }} {{ p.last_name }}</span>
+            <span class="score" style="color:#10b981">{{ p.assists }} A</span>
         </div>
         {% endfor %}
     </div>

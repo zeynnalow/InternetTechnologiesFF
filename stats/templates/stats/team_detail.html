@@ -3,39 +3,34 @@
 {% block content %}
 <div class="hero-section">
     <h1>🛡️ {{ team.name }}</h1>
-    <p>Location: <b>{{ team.city }}</b> | Total Players: {{ squad.count }}</p>
-    <a href="{% url 'home' %}" style="text-decoration: none; color: var(--primary-color);">← Back to Dashboard</a>
+    <p>{{ team.city }} | Squad Size: {{ squad.count }}</p>
+    <br>
+    <a href="{% url 'home' %}" style="color: var(--primary-color); text-decoration:none;">← Dashboard</a>
 </div>
 
 <div class="card">
-    <div class="card-header">
-        <h2>Team Squad (Kadro)</h2>
+    <div class="card-header"><h2>Team Squad</h2></div>
+    <div class="table-wrapper">
+        <table class="match-table">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in squad %}
+                <tr>
+                    <td style="font-weight:600">{{ player.first_name }} {{ player.last_name }}</td>
+                    <td class="score">{{ player.goals }}</td>
+                    <td class="score" style="color:#10b981">{{ player.assists }}</td>
+                    <td>{{ player.goals|add:player.assists }} pts</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-    <table class="match-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Player Name</th>
-                <th>Goals</th>
-                <th>Assists</th>
-                <th>Total Contribution</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for player in squad %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td style="font-weight: 600;">{{ player.first_name }} {{ player.last_name }}</td>
-                <td class="score">{{ player.goals }}</td>
-                <td class="score" style="color: #10b981;">{{ player.assists }}</td>
-                <td style="color: var(--text-muted);">{{ player.goals|add:player.assists }} pts</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5" style="text-align: center; padding: 20px;">No players registered in this team yet.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </div>
 {% endblock %}

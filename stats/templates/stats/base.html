@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +8,14 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-
 <body>
     <nav class="navbar">
-        <div class="container">
+        <div class="container navbar-content">
             <a href="{% url 'home' %}" class="logo">⚽ Pro<span>League</span></a>
             <ul class="nav-links">
                 <li><a href="{% url 'home' %}">Dashboard</a></li>
                 <li><a href="{% url 'player_stats' %}">Statistics</a></li>
-                <li><a href="/admin/" class="admin-btn">Admin Panel</a></li>
+                <li><a href="/admin/" class="admin-btn">Admin</a></li>
             </ul>
         </div>
     </nav>
@@ -28,8 +26,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Football Management System | Modern Programming Languages Project</p>
+        <p>&copy; 2026 Football Management System | Modern Programming Languages</p>
     </footer>
 </body>
-
 </html>
